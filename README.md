@@ -12,9 +12,13 @@ Custom boot logo for the **Redmi K20 Pro / Mi 9T Pro (`raphael`)**, flashable fr
 
 > ⚠️ **Only for raphael.** The installer refuses to flash on any other device.
 
+## Download
+
+Get **`RRSplash-raphael.zip`** from the [latest release](https://github.com/insaf0902/K20-PRO-BOOTSPLASH/releases/latest).
+
 ## Install
 
-1. Build or download `RRSplash-raphael.zip` (see below).
+1. [Download](https://github.com/insaf0902/K20-PRO-BOOTSPLASH/releases/latest) or build `RRSplash-raphael.zip` (see below).
 2. Boot into TWRP / OrangeFox and flash the zip.
 3. Reboot.
 
