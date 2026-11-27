@@ -96,7 +96,7 @@ word_w = bb_word[2] - bb_word[0]
 asc_top = bb_word[1]                          # top of the 'd' ascender
 x_h = f_big.getbbox("o")
 xh_top = x_h[1]
-robot = bugdroid(44)
+robot = bugdroid(48)
 gap = 12
 total = word_w + gap + robot.width
 x0 = (W - total) / 2 - bb_word[0]
@@ -108,9 +108,9 @@ d.text((x0, wy), word, font=f_big, fill=WHITE)
 pb = f_small.getbbox("Powered by")
 py = wy + asc_top - (pb[3]) - 6
 d.text((x0 + bb_word[0] - pb[0], py), "Powered by", font=f_small, fill=WHITE)
-# robot head to the right, its bottom level with the top of the x-height
+# robot head on the same line as "android": bottom on the text baseline
 rx = int(x0 + bb_word[2] + gap)
-ry = int(wy + xh_top - robot.height - 2)
+ry = int(base_y - robot.height)
 c.paste(GREEN, (rx, ry), robot)
 
 c.save(out)
