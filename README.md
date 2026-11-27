@@ -4,9 +4,8 @@ Custom boot logo for the **Redmi K20 Pro / Mi 9T Pro (`raphael`)**, flashable fr
 
 <p align="center"><img src="assets/preview.png" width="300" alt="Boot logo preview"></p>
 
-- Resurrection Remix "double swoosh" logo in a red gradient, on a dark disc with a red glow
-- `#GETRESURRECTED` under the logo
-- **REDMI K20 PRO** in clean bold silver capitals, with a red unlocked-padlock icon at the bottom
+- Resurrection Remix "double swoosh" logo in a red gradient, centred on a dark disc with a red glow
+- `#GETRESURRECTED` and a red unlocked-padlock icon at the bottom (no glow behind the text)
 - Shown on normal boot **and** on unlocked-bootloader boot (no "unlocked" warning screen)
 - Fastboot and "system destroyed" screens stay stock
 
@@ -36,7 +35,7 @@ or flash `logo.img` from the official MIUI fastboot ROM.
 
 ## Build
 
-Requirements: `python3` with Pillow and `zip`. The Inter font is bundled in `assets/fonts/`.
+Requirements: `python3` with Pillow and `zip`.
 
 ```sh
 ./build.sh            # -> out/RRSplash-raphael.zip
@@ -55,7 +54,6 @@ You can also zip it by hand: `zip -r RRSplash-raphael.zip META-INF cache`.
 | `assets/rr_swoosh.svg` | Resurrection Remix logo (from Simple Icons) |
 | `assets/rr_swoosh_mask.png` | The SVG rendered to 1200×1200 (`tools/render_svg.js`) |
 | `assets/boot_logo_1080x2340.png` | Final boot picture |
-| `assets/fonts/Inter-Bold.otf` | Inter Bold font (SIL OFL 1.1, see `LICENSE-Inter.txt`) |
 | `tools/make.py` | Composes the 1080×2340 boot picture |
 | `tools/pack.py` | Writes the picture into slots 1 and 3 of `logo.img` |
 | `tools/render_svg.js` | Renders the SVG with Playwright/Chromium |
@@ -76,6 +74,5 @@ Xiaomi `LOGO!!!!` format: zeros up to `0x4000`, then the magic `LOGO!!!!` follow
 
 - Resurrection Remix logo: Resurrection Remix OS, via [Simple Icons](https://simpleicons.org/). No license is
   stated for this icon; it belongs to the Resurrection Remix project.
-- [Inter](https://rsms.me/inter/) font: The Inter Project Authors, SIL Open Font License 1.1.
 - Installer `update-binary` and busybox: topjohnwu (Magisk).
 - Based on the original EvoSplash zip for raphael.
