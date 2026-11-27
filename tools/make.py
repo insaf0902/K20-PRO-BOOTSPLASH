@@ -78,10 +78,10 @@ R = 290
 ring = Image.new('L', (W, H), 0)
 ImageDraw.Draw(ring).ellipse([CX - R, CY - R, CX + R, CY + R], fill=255)
 c = add_glow(c, ring, GLOW, 55, 0.55)
-c = add_glow(c, ring, (110, 0, 18), 140, 0.55)
+c = add_glow(c, ring, (110, 0, 18), 85, 0.5)
 spot = Image.new('L', (W, H), 0)
-ImageDraw.Draw(spot).ellipse([CX - R - 40, CY - 40, CX + 10, CY + R + 40], fill=255)
-c = add_glow(c, spot, GLOW, 100, 0.5)
+ImageDraw.Draw(spot).ellipse([CX - R - 30, CY - 60, CX - 20, CY + R - 30], fill=255)
+c = add_glow(c, spot, GLOW, 80, 0.45)
 disc = Image.new('L', (W, H), 0)
 ImageDraw.Draw(disc).ellipse([CX - R, CY - R, CX + R, CY + R], fill=255)
 disc = disc.filter(ImageFilter.GaussianBlur(3))
@@ -107,13 +107,13 @@ tag = tag.crop(tag.convert('L').point(lambda v: 255 if v > 12 else 0).getbbox())
 sc = W / im.width * 0.60
 tag = tag.resize((round(tag.width * sc), round(tag.height * sc)), Image.LANCZOS)
 tag_layer = Image.new('RGB', (W, H), 0)
-tag_layer.paste(tag, ((W - tag.width) // 2, CY + R + 70))
+tag_layer.paste(tag, ((W - tag.width) // 2, CY + R + 150))
 c = ImageChops.lighter(c, tag_layer)   # no dark box over the glow
 
-# 4. REDMI K20 PRO in Road Rage
-rr_font = ImageFont.truetype(os.path.join(FONTS, 'RoadRage-Regular.ttf'), 96)
-mk, _ = spaced_mask("REDMI K20 PRO", rr_font, 6, 1985)
-c.paste(v_gradient(mk, (255, 255, 255), (200, 200, 200)), (0, 0), mk)
+# 4. REDMI K20 PRO: clean bold sans, spaced, silver like the logo text (no glow)
+name_font = ImageFont.truetype(os.path.join(FONTS, 'Inter-Bold.otf'), 56)
+mk, _ = spaced_mask("REDMI K20 PRO", name_font, 12, 2000)
+c.paste(v_gradient(mk, (250, 250, 250), (165, 165, 165)), (0, 0), mk)
 
 
 # 5. bootloader-unlocked badge: open padlock
