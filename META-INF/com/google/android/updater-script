@@ -1,0 +1,55 @@
+#!/sbin/sh
+# Resurrection Remix bootsplash for Redmi K20 Pro / Mi 9T Pro (raphael)
+# Args from update-binary: $1=api $2=outfd $3=zipfile
+OUTFD=$2
+ui_print() { echo "ui_print $1" > /proc/self/fd/$OUTFD; echo "ui_print" > /proc/self/fd/$OUTFD; }
+abort() { ui_print "! $1"; ui_print "! Nothing was flashed."; exit 1; }
+
+IMG=$INSTALLER/cache/logo.img
+ui_print "*******************************"
+ui_print "  Bootsplash for Redmi K20 Pro "
+ui_print "*******************************"
+
+# 1. Device check
+DEV="$(getprop ro.product.device) $(getprop ro.build.product) $(getprop ro.product.vendor.device)"
+case "$DEV" in
+  *raphael*) ui_print "- Device: raphael OK" ;;
+  *) abort "Unsupported device ($DEV). Only for raphael." ;;
+esac
+
+# 2. Find logo partition
+PART=""
+for p in /dev/block/by-name/logo /dev/block/bootdevice/by-name/logo; do
+  [ -e "$p" ] && { PART=$p; break; }
+done
+[ -z "$PART" ] && abort "logo partition not found"
+ui_print "- Partition: $PART"
+
+# 3. Size check
+[ -f "$IMG" ] || abort "logo.img missing from zip"
+ISZ=$(stat -c %s "$IMG")
+PSZ=$(blockdev --getsize64 "$PART" 2>/dev/null)
+[ -n "$PSZ" ] && [ "$ISZ" -gt "$PSZ" ] && abort "Image ($ISZ) larger than partition ($PSZ)"
+
+# 4. Backup stock logo (only once, never overwrite a previous backup)
+BK=/sdcard/logo_backup.img
+if [ -d /sdcard ] && [ ! -f "$BK" ]; then
+  dd if="$PART" of="$BK" 2>/dev/null && ui_print "- Backup saved: $BK" || ui_print "- Warning: backup failed"
+else
+  ui_print "- Backup exists or /sdcard unavailable, skipping"
+fi
+
+# 5. Flash
+ui_print "- Flashing bootsplash..."
+dd if="$IMG" of="$PART" bs=4096 2>/dev/null || abort "dd write failed"
+sync
+
+# 6. Verify
+BLK=$((ISZ / 4096))
+if dd if="$PART" bs=4096 count=$BLK 2>/dev/null | cmp -s - "$IMG"; then
+  ui_print "- Verified OK"
+else
+  abort "Verification FAILED! Restore with: fastboot flash logo logo_backup.img"
+fi
+ui_print "- Done. Reboot to see the new logo."
+exit 0
