@@ -4,8 +4,8 @@ Custom boot logo for the **Redmi K20 Pro / Mi 9T Pro (`raphael`)**, flashable fr
 
 <p align="center"><img src="assets/preview.png" width="300" alt="Boot logo preview"></p>
 
-- Resurrection Remix "double swoosh" logo in a red gradient, centred on a dark disc with a red glow
-- `#GETRESURRECTED` and a red unlocked-padlock icon at the bottom (no glow behind the text)
+- Resurrection Remix "double swoosh" logo with `#GETRESURRECTED`
+- **REDMI K20 PRO** and **POWERED BY ANDROID** at the bottom
 - Shown on normal boot **and** on unlocked-bootloader boot (no "unlocked" warning screen)
 - Fastboot and "system destroyed" screens stay stock
 
@@ -35,7 +35,8 @@ or flash `logo.img` from the official MIUI fastboot ROM.
 
 ## Build
 
-Requirements: `python3` with Pillow and `zip`.
+Requirements: `python3` with Pillow, `zip`, and the [Inter](https://rsms.me/inter/) font
+(set `FONT_DIR` if it is not in `/usr/share/fonts/opentype/inter`).
 
 ```sh
 ./build.sh            # -> out/RRSplash-raphael.zip
@@ -74,5 +75,8 @@ Xiaomi `LOGO!!!!` format: zeros up to `0x4000`, then the magic `LOGO!!!!` follow
 
 - Resurrection Remix logo: Resurrection Remix OS, via [Simple Icons](https://simpleicons.org/). No license is
   stated for this icon; it belongs to the Resurrection Remix project.
+- The Android robot is reproduced or modified from work created and shared by Google and used according
+  to terms described in the [Creative Commons 3.0 Attribution License](https://creativecommons.org/licenses/by/3.0/).
+  Android is a trademark of Google LLC.
 - Installer `update-binary` and busybox: topjohnwu (Magisk).
 - Based on the original EvoSplash zip for raphael.

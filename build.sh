@@ -1,7 +1,7 @@
 #!/bin/sh
 # Rebuild the boot logo and the flashable zip.
 #   ./build.sh              -> out/RRSplash-raphael.zip
-# Needs: python3 + Pillow, zip
+# Needs: python3 + Pillow, zip, Inter font (set FONT_DIR if not in /usr/share/fonts/opentype/inter)
 set -e
 cd "$(dirname "$0")"
 mkdir -p out
