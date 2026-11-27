@@ -4,8 +4,9 @@ Custom boot logo for the **Redmi K20 Pro / Mi 9T Pro (`raphael`)**, flashable fr
 
 <p align="center"><img src="assets/preview.png" width="300" alt="Boot logo preview"></p>
 
-- Resurrection Remix "double swoosh" logo with `#GETRESURRECTED`
-- **REDMI K20 PRO** and **POWERED BY ANDROID** at the bottom
+- Resurrection Remix "double swoosh" logo in a red gradient, on a dark disc with a red glow
+- `#GETRESURRECTED` under the logo
+- **REDMI K20 PRO** in the Road Rage font, with a red **BOOTLOADER UNLOCKED** padlock badge at the bottom
 - Shown on normal boot **and** on unlocked-bootloader boot (no "unlocked" warning screen)
 - Fastboot and "system destroyed" screens stay stock
 
@@ -36,7 +37,7 @@ or flash `logo.img` from the official MIUI fastboot ROM.
 ## Build
 
 Requirements: `python3` with Pillow, `zip`, and the [Inter](https://rsms.me/inter/) font
-(set `FONT_DIR` if it is not in `/usr/share/fonts/opentype/inter`).
+(set `FONT_DIR` if it is not in `/usr/share/fonts/opentype/inter`). Road Rage is bundled in `assets/fonts/`.
 
 ```sh
 ./build.sh            # -> out/RRSplash-raphael.zip
@@ -55,6 +56,7 @@ You can also zip it by hand: `zip -r RRSplash-raphael.zip META-INF cache`.
 | `assets/rr_swoosh.svg` | Resurrection Remix logo (from Simple Icons) |
 | `assets/rr_swoosh_mask.png` | The SVG rendered to 1200×1200 (`tools/render_svg.js`) |
 | `assets/boot_logo_1080x2340.png` | Final boot picture |
+| `assets/fonts/RoadRage-Regular.ttf` | Road Rage font (SIL OFL 1.1, see `OFL-RoadRage.txt`) |
 | `tools/make.py` | Composes the 1080×2340 boot picture |
 | `tools/pack.py` | Writes the picture into slots 1 and 3 of `logo.img` |
 | `tools/render_svg.js` | Renders the SVG with Playwright/Chromium |
@@ -75,8 +77,6 @@ Xiaomi `LOGO!!!!` format: zeros up to `0x4000`, then the magic `LOGO!!!!` follow
 
 - Resurrection Remix logo: Resurrection Remix OS, via [Simple Icons](https://simpleicons.org/). No license is
   stated for this icon; it belongs to the Resurrection Remix project.
-- The Android robot is reproduced or modified from work created and shared by Google and used according
-  to terms described in the [Creative Commons 3.0 Attribution License](https://creativecommons.org/licenses/by/3.0/).
-  Android is a trademark of Google LLC.
+- [Road Rage](https://fonts.google.com/specimen/Road+Rage) font: The Road Rage Project Authors, SIL Open Font License 1.1.
 - Installer `update-binary` and busybox: topjohnwu (Magisk).
 - Based on the original EvoSplash zip for raphael.
