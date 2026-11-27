@@ -14,7 +14,6 @@ src, rrmask, out = sys.argv[1:4]
 W, H = 1080, 2340
 HERE = os.path.dirname(os.path.abspath(__file__))
 FONTS = os.path.join(HERE, '..', 'assets', 'fonts')
-INTER = os.environ.get('FONT_DIR', '/usr/share/fonts/opentype/inter/').rstrip('/') + '/'
 
 # palette
 RED_HI = (255, 70, 60)      # top-right of the swoosh
@@ -117,7 +116,7 @@ mk, _ = spaced_mask("REDMI K20 PRO", rr_font, 6, 1985)
 c.paste(v_gradient(mk, (255, 255, 255), (200, 200, 200)), (0, 0), mk)
 
 
-# 5. bootloader-unlocked badge: open padlock + text
+# 5. bootloader-unlocked badge: open padlock
 def padlock(h, s=4):
     """Open padlock, white on black, height h (drawn at s-times then downscaled)."""
     H4 = h * s
@@ -146,24 +145,11 @@ def padlock(h, s=4):
     return img.resize((img.width // s, img.height // s), Image.LANCZOS)
 
 
-badge_font = ImageFont.truetype(INTER + 'Inter-SemiBold.otf', 28)
-lock = padlock(46)
-text = "BOOTLOADER UNLOCKED"
-sp = 7
-tw = sum(badge_font.getlength(ch) for ch in text) + sp * (len(text) - 1)
-gap = 18
-total = lock.width + gap + tw
-x0 = (W - total) / 2
-y = 2140
-asc = badge_font.getmetrics()[0]
-cap = badge_font.getbbox("H")
-cap_h = cap[3] - cap[1]
-lock_y = int(y + asc - lock.height + 2)
+# padlock only, centred under the device name
+lock = padlock(72)
 lock_mask = Image.new('L', (W, H), 0)
-lock_mask.paste(lock, (int(x0), lock_y))
-c = add_glow(c, lock_mask, GLOW, 10, 0.6)
+lock_mask.paste(lock, ((W - lock.width) // 2, 2135))
+c = add_glow(c, lock_mask, GLOW, 14, 0.7)
 c.paste(RED_HI, (0, 0), lock_mask)
-tm, _ = spaced_mask(text, badge_font, sp, y, x_center=x0 + lock.width + gap + tw / 2)
-c.paste((190, 190, 190), (0, 0), tm)
 
 c.save(out)

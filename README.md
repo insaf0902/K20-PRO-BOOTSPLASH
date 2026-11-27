@@ -6,7 +6,7 @@ Custom boot logo for the **Redmi K20 Pro / Mi 9T Pro (`raphael`)**, flashable fr
 
 - Resurrection Remix "double swoosh" logo in a red gradient, on a dark disc with a red glow
 - `#GETRESURRECTED` under the logo
-- **REDMI K20 PRO** in the Road Rage font, with a red **BOOTLOADER UNLOCKED** padlock badge at the bottom
+- **REDMI K20 PRO** in the Road Rage font, with a red unlocked-padlock icon at the bottom
 - Shown on normal boot **and** on unlocked-bootloader boot (no "unlocked" warning screen)
 - Fastboot and "system destroyed" screens stay stock
 
@@ -36,8 +36,7 @@ or flash `logo.img` from the official MIUI fastboot ROM.
 
 ## Build
 
-Requirements: `python3` with Pillow, `zip`, and the [Inter](https://rsms.me/inter/) font
-(set `FONT_DIR` if it is not in `/usr/share/fonts/opentype/inter`). Road Rage is bundled in `assets/fonts/`.
+Requirements: `python3` with Pillow and `zip`. The Road Rage font is bundled in `assets/fonts/`.
 
 ```sh
 ./build.sh            # -> out/RRSplash-raphael.zip
