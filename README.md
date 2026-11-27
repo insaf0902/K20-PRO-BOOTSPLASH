@@ -4,8 +4,9 @@ Custom boot logo for the **Redmi K20 Pro / Mi 9T Pro (`raphael`)**, flashable fr
 
 <p align="center"><img src="assets/preview.png" width="300" alt="Boot logo preview"></p>
 
-- Resurrection Remix "double swoosh" logo with `#GETRESURRECTED`
-- **REDMI K20 PRO** and **POWERED BY ANDROID** at the bottom
+- Silver Resurrection Remix "double swoosh" logo with `#GETRESURRECTED`
+- Small outline "unlocked" padlock at the top, like the stock Redmi unlocked boot screen
+- Stock-style **Powered by android** lockup with the green robot head at the bottom
 - Shown on normal boot **and** on unlocked-bootloader boot (no "unlocked" warning screen)
 - Fastboot and "system destroyed" screens stay stock
 
@@ -35,8 +36,7 @@ or flash `logo.img` from the official MIUI fastboot ROM.
 
 ## Build
 
-Requirements: `python3` with Pillow, `zip`, and the [Inter](https://rsms.me/inter/) font
-(set `FONT_DIR` if it is not in `/usr/share/fonts/opentype/inter`).
+Requirements: `python3` with Pillow and `zip`. The Poppins font is bundled in `assets/fonts/`.
 
 ```sh
 ./build.sh            # -> out/RRSplash-raphael.zip
@@ -55,6 +55,7 @@ You can also zip it by hand: `zip -r RRSplash-raphael.zip META-INF cache`.
 | `assets/rr_swoosh.svg` | Resurrection Remix logo (from Simple Icons) |
 | `assets/rr_swoosh_mask.png` | The SVG rendered to 1200×1200 (`tools/render_svg.js`) |
 | `assets/boot_logo_1080x2340.png` | Final boot picture |
+| `assets/fonts/Poppins-*.ttf` | Poppins font (SIL OFL 1.1, see `OFL-Poppins.txt`) |
 | `tools/make.py` | Composes the 1080×2340 boot picture |
 | `tools/pack.py` | Writes the picture into slots 1 and 3 of `logo.img` |
 | `tools/render_svg.js` | Renders the SVG with Playwright/Chromium |
@@ -78,5 +79,6 @@ Xiaomi `LOGO!!!!` format: zeros up to `0x4000`, then the magic `LOGO!!!!` follow
 - The Android robot is reproduced or modified from work created and shared by Google and used according
   to terms described in the [Creative Commons 3.0 Attribution License](https://creativecommons.org/licenses/by/3.0/).
   Android is a trademark of Google LLC.
+- [Poppins](https://fonts.google.com/specimen/Poppins) font: The Poppins Project Authors, SIL Open Font License 1.1.
 - Installer `update-binary` and busybox: topjohnwu (Magisk).
 - Based on the original EvoSplash zip for raphael.
